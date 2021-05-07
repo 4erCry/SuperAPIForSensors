@@ -1,6 +1,11 @@
 import React, {Component} from "react";
 import {Container, Navbar, Nav} from "react-bootstrap";
 import sas from './sus1.jpg'
+import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
+
+import Home from "../pages/Home";
+import Docs from "../pages/Docs";
+import Sensors from "../pages/Sensors";
 
 export default class Header extends Component{
     render() {
@@ -27,6 +32,14 @@ export default class Header extends Component{
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
+
+                <Router>
+                    <Switch>
+                        <Route exact path="/" component={Home}/>
+                        <Route exact path="/docs" component={Docs}/>
+                        <Route exact path="/sensors" component={Sensors}/>
+                    </Switch>
+                </Router>
             </>
         );
     }
