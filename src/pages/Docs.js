@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 import {Col, Container, Nav, Row, Tab} from "react-bootstrap";
-import {Button} from "bootstrap";
+import sas from '../img/sas.png'
 
 export default class Docs extends Component{
     render() {
@@ -30,38 +30,38 @@ export default class Docs extends Component{
                         <Col sm={9}>
                             <Tab.Content className="mt-3">
                                 <Tab.Pane eventKey="first">
-                                    <img src="https://images.wallpaperscraft.ru/image/siluet_luna_lodka_135277_225x300.jpg"/>
+                                    <img src={sas}/>
                                     <p>
-                                        Информация которую нужно заменить,
-                                        но мне оооочень лень.
+                                        Интересный факт номер 1.
+                                        За границей все уверены, что Чебурашка – это ОНА.
                                     </p>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second">
-                                    <img src="https://images.wallpaperscraft.ru/image/siluet_luna_lodka_135277_225x300.jpg"/>
+                                    <img src={sas}/>
                                     <p>
-                                        Информация которую нужно заменить,
-                                        но мне оооочень лень.
+                                        Интересный факт номер 2.
+                                        Каждого четвертого американца показывали по телевизору.
                                     </p>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="third">
-                                    <img src="https://image.winudf.com/v2/image1/Y29tLmhkd2FsbHBhcGVyLndhbGxwYXBlcl9zY3JlZW5fcnUtUlVfNl8xNjAzMTE3MTYzXzAxMA/screen-6.jpg?fakeurl=1&type=.jpg"/>
+                                    <img src={sas}/>
                                     <p>
-                                        Информация которую нужно заменить,
-                                        но мне оооочень лень.
+                                        Интересный факт номер 3.
+                                        Чтобы расколоть орех, достаточно положить его в горячую воду на 48 часов.
                                     </p>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="fourth">
-                                    <img src="https://image.winudf.com/v2/image1/Y29tLmhkd2FsbHBhcGVyLndhbGxwYXBlcl9zY3JlZW5fcnUtUlVfNl8xNjAzMTE3MTYzXzAxMA/screen-6.jpg?fakeurl=1&type=.jpg"/>
+                                    <img src={sas}/>
                                     <p>
-                                        Информация которую нужно заменить,
-                                        но мне оооочень лень.
+                                        Интересный факт номер 4.
+                                        Все современные реактивные самолеты способны преодолеть скорость звука.
                                     </p>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="fifth">
-                                    <img src="https://image.winudf.com/v2/image1/Y29tLmhkd2FsbHBhcGVyLndhbGxwYXBlcl9zY3JlZW5fcnUtUlVfNl8xNjAzMTE3MTYzXzAxMA/screen-6.jpg?fakeurl=1&type=.jpg"/>
+                                    <img src={sas}/>
                                     <p>
-                                        Информация которую нужно заменить,
-                                        но мне оооочень лень.
+                                        Интересный факт номер 0.
+                                        Факты были не очень интересны(
                                     </p>
                                 </Tab.Pane>
                             </Tab.Content>
