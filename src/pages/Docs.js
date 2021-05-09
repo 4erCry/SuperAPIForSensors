@@ -5,11 +5,11 @@ import sas from '../img/sas.png'
 export default class Docs extends Component{
     render() {
         return (
-            <Container>
+            <Container class="mt-5">
                 <Tab.Container id="ledt-tabs-example" defaultActiveKey="first">
-                    <Row>
+                    <Row class="pt-100">
                         <Col sm={3}>
-                            <Nav variant="pills" className="flex-column mt-3">
+                            <Nav variant="pills" className="flex-column mt-5">
                                 <Nav.Item>
                                     <Nav.Link eventKey="first">S</Nav.Link>
                                 </Nav.Item>
@@ -28,7 +28,7 @@ export default class Docs extends Component{
                             </Nav>
                         </Col>
                         <Col sm={9}>
-                            <Tab.Content className="mt-3">
+                            <Tab.Content className="mt-5">
                                 <Tab.Pane eventKey="first">
                                     <img src={sas}/>
                                     <p>

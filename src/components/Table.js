@@ -8,7 +8,6 @@ export default class Table extends Component {
                 <BootstrapTable data={this.props.data}>
                     <TableHeaderColumn
                         isKey dataField='id'
-                        dataField='id'
                         dataAlign='center'
                         headerAlign="left"
                         width="30">

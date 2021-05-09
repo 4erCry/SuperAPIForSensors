@@ -1,7 +1,7 @@
 import React, {Component} from "react";
 import {Container, Navbar, Nav} from "react-bootstrap";
 import sas from './sus1.jpg'
-import {Route, BrowserRouter as Router, Switch, Link} from "react-router-dom";
+import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 
 import Home from "../pages/Home";
 import Docs from "../pages/Docs";
@@ -11,7 +11,7 @@ export default class Header extends Component{
     render() {
         return (
             <>
-                <Navbar collapseOnSelect expand="md" bg="dark" variant="dark">
+                <Navbar fixed="top" collapseOnSelect expand="md" bg="dark" variant="dark">
                     <Container>
                         <Navbar.Brand href="/">
                             <img
