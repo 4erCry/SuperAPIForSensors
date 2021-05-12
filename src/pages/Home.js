@@ -6,7 +6,7 @@ export default class Home extends Component{
     render() {
         return (
             <>
-                <CarouselBox/>
+                <CarouselBox style={{'margin-top': '56px'}}/>
                 <Container>
                     <h2 className="text-center m-4">Информация о команде</h2>
                     <div className="card-group">

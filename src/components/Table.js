@@ -7,14 +7,7 @@ export default class Table extends Component {
             <div>
                 <BootstrapTable data={this.props.data}>
                     <TableHeaderColumn
-                        isKey dataField='id'
-                        dataAlign='center'
-                        headerAlign="left"
-                        width="30">
-                        ID
-                    </TableHeaderColumn>
-                    <TableHeaderColumn
-                        dataField='timedate'
+                        isKey dataField='time'
                         dataAlign='center'
                         headerAlign="center"
                         width="50%">
