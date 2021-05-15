@@ -2,8 +2,8 @@ import React, {Component} from "react";
 import {Col, Container, Nav, Row, Tab} from "react-bootstrap";
 import sas from '../img/sas.png'
 
-export default class Docs extends Component{
-    render() {
+export default function  Docs() {
+
         return (
             <Container class="mt-5">
                 <Tab.Container id="ledt-tabs-example" defaultActiveKey="first">
@@ -71,5 +71,4 @@ export default class Docs extends Component{
 
             </Container>
         )
-    }
 }

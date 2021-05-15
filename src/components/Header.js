@@ -6,12 +6,14 @@ import {Route, BrowserRouter as Router, Switch} from "react-router-dom";
 import Home from "../pages/Home";
 import Docs from "../pages/Docs";
 import Sensors from "../pages/Sensors";
+import Registration from "../pages/Registration";
+import Entrance from "../pages/Entrance";
 
 export default function  Header() {
 
-    const [show, setShow] = useState(false);
-    const handleClose=()=>setShow(false);
-    const handleShow=()=>setShow(true);
+    const [user, setUser] = useState(false);
+    const signOut=()=>setUser(false);
+    const signIn=()=>setUser(true);
 
         return (
             <>
@@ -33,44 +35,40 @@ export default function  Header() {
                                 <Nav.Link href="/docs">Документация</Nav.Link>
                                 <Nav.Link href="/table">Датчики</Nav.Link>
                             </Nav>
-                            <Nav className="mr-auto" style={{'gap': '10px'}} >
-                                <Button variant="outline-info" onClick={handleShow}>Log In</Button>
-                                <Button variant="outline-info" onClick={handleShow}>Sign Out</Button>
+                            <Nav className="mr-auto" style={{'gap': '10px'}}>
+                                <Button  variant="outline-info" href="/entrance">SIGN IN</Button>
+                                <Button variant="outline-info" href="/register">SIGN UP</Button>
                             </Nav>
                         </Navbar.Collapse>
                     </Container>
                 </Navbar>
-
-                <Modal show={show} onHide={handleClose}>
-                    <Modal.Header closeButton>
-                        <Modal.Title>Log in</Modal.Title>
-                    </Modal.Header>
-                    <Modal.Body>
-                        <Form>
-                            <Form.Group controlId="formBasicEmail">
-                                <Form.Label>EMAIL</Form.Label>
-                                <Form.Control type="email" placeholder="Введите email"/>
-                            </Form.Group>
-
-                            <Form.Group controlId="formBasicPassword">
-                                <Form.Label>ПАРОЛЬ</Form.Label>
-                                <Form.Control type="password" placeholder="Введите пароль"/>
-                            </Form.Group>
-
-                            <Form.Group controlId="formBasicCheckbox">
-                                <Form.Check type="checkbox" label="Запомнить меня"/>
-                            </Form.Group>
-                        </Form>
-                    </Modal.Body>
-                </Modal>
 
                 <Router>
                     <Switch>
                         <Route exact path="/" component={Home}/>
                         <Route exact path="/docs" component={Docs}/>
                         <Route exact path="/table" component={Sensors}/>
+                        <Route exect path="/register" component={Registration}/>
+                        <Route exect path="/entrance" component={Entrance}/>
                     </Switch>
                 </Router>
             </>
         );
 }
+
+/*const [show, setShow] = useState(false);
+const handleClose=()=>setShow(false);
+const handleShow=()=>setShow(true);
+const [email, setEmail] = useState('');
+const [password, setPassword] = useState('');
+const [user, setUser] = useState(false);
+const signOut=()=>setUser(false);*/
+
+{/*<Modal show={show} onHide={handleClose}>
+                    <Modal.Header closeButton>
+                        <Modal.Title>Log in</Modal.Title>
+                    </Modal.Header>
+                    <Modal.Body>
+
+                    </Modal.Body>
+                </Modal>*/}
