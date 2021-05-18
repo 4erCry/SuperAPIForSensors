@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-import CarouselBox from "../components/CarouselBox";
+import React from "react";
+import CarouselBox from "../utils/CarouselBox";
 import { Container} from "react-bootstrap";
 
 export default function  Home() {

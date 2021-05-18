@@ -1,6 +1,6 @@
-import React, {Component} from "react";
+import React from "react";
 import {Col, Container, Nav, Row, Tab} from "react-bootstrap";
-import sas from '../img/sas.png'
+import sas from '../assets/sas.png'
 
 export default function  Docs() {
 
@@ -30,35 +30,35 @@ export default function  Docs() {
                         <Col sm={9}>
                             <Tab.Content className="mt-5">
                                 <Tab.Pane eventKey="first">
-                                    <img src={sas}/>
+                                    <img src={sas} alt={sas}/>
                                     <p>
                                         Интересный факт номер 1.
                                         За границей все уверены, что Чебурашка – это ОНА.
                                     </p>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="second">
-                                    <img src={sas}/>
+                                    <img src={sas} alt={sas}/>
                                     <p>
                                         Интересный факт номер 2.
                                         Каждого четвертого американца показывали по телевизору.
                                     </p>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="third">
-                                    <img src={sas}/>
+                                    <img src={sas} alt={sas}/>
                                     <p>
                                         Интересный факт номер 3.
                                         Чтобы расколоть орех, достаточно положить его в горячую воду на 48 часов.
                                     </p>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="fourth">
-                                    <img src={sas}/>
+                                    <img src={sas} alt={sas}/>
                                     <p>
                                         Интересный факт номер 4.
                                         Все современные реактивные самолеты способны преодолеть скорость звука.
                                     </p>
                                 </Tab.Pane>
                                 <Tab.Pane eventKey="fifth">
-                                    <img src={sas}/>
+                                    <img src={sas} alt={sas}/>
                                     <p>
                                         Интересный факт номер 0.
                                         Факты были не очень интересны(

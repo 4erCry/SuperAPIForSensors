@@ -1,14 +1,14 @@
 import React, {Component} from "react";
-import {Container, Form, Button} from "react-bootstrap";
-import Table from "../components/Table";
+import {Container, Form} from "react-bootstrap";
+import Table from "../utils/Table";
 
 function TableBanner(props) {
     if (!props.code) {return null}
-    return <div className="warning"></div>
-
+    return <div className="warning"/>
 }
 
 export default class Sensors extends Component{
+
     constructor(props) {
         super(props)
         this.state = { showTable: true, items: [], errorText: ""}
@@ -63,11 +63,6 @@ export default class Sensors extends Component{
                     });
                 }
             )
-
-
-        // this.setState((state) => ({
-        //     showTable: !state.showTable,
-        // }))
     }
     render() {
         return (
@@ -75,11 +70,6 @@ export default class Sensors extends Component{
                 <Container style={{width: '500px'}}>
                     <h1 className="text-center">Введите данные</h1>
                     <Form>
-
-                        {/*<Form.Group controlId="formBasicValue">*/}
-                        {/*    <Form.Label>Введите значение</Form.Label>*/}
-                        {/*    <Form.Control as="textarea" rows="1"/>*/}
-                        {/*</Form.Group>*/}
 
                         <Form.Group controlId="formBasicStartDateTime">
                             <Form.Label>Дата начала</Form.Label>
