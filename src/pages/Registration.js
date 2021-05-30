@@ -1,74 +1,83 @@
-import React from "react";
-import {Container, Form, Button} from "react-bootstrap";
+import React, {Component} from "react";
+import {Form, Container, Button} from "react-bootstrap";
+import AuthService from "../components/AuthService";
 
-import {withAuth} from "../components/UserStatus";
-import {Redirect} from "react-router-dom";
+export default class Entrance2 extends Component {
 
-export default withAuth(({isAuthorized, authorize})=> (
-    isAuthorized ? (<Redirect to="/"/>) : (
+    constructor(props) {
+        super(props)
+        this.handleRegister = this.handleRegister.bind(this)
+        this.onChangeUsername = this.onChangeUsername.bind(this);
+        this.onChangePassword = this.onChangePassword.bind(this);
+        this.onChangeTimezone = this.onChangeTimezone.bind(this);
+        this.state = {
+            username: "",
+            password: "",
+            timezone: 0,
+        }
+    }
 
-        <Container style={{width: '500px'}}>
-            <h1 className="text-center">Введите данные</h1>
-            <Form>
-                <Form.Group controlId="formBasicEmail">
-                    <Form.Label>EMAIL</Form.Label>
-                    <Form.Control type="email" placeholder="Введите email"/>
-                </Form.Group>
+    onChangeUsername(e) {
+        this.setState({
+            username: e.target.value
+        });
+    }
 
-                <Form.Group controlId="formBasicPassword">
-                    <Form.Label>ПАРОЛЬ</Form.Label>
-                    <Form.Control type="password" placeholder="Введите пароль"/>
-                </Form.Group>
+    onChangePassword(e) {
+        this.setState({
+            password: e.target.value
+        });
+    }
 
-                <Form.Group controlId="timeZone">
-                    <Form.Label>Временная зона</Form.Label>
-                    <Form.Control type="timeZone" placeholder="Введите временную зону"/>
-                </Form.Group>
+    onChangeTimezone(e) {
+        this.setState({
+            timezone: parseInt(e.target.value)
+        });
+    }
 
-                <Form.Group controlId="formBasicCheckbox">
-                    <Form.Check type="checkbox" label="Запомнить меня"/>
-                </Form.Group>
+    handleRegister(e) {
+        e.preventDefault();
 
-                <Button onClick={authorize} className="primary">Отправить</Button>
-            </Form>
-        </Container>
-    )
-    )
-)
+        AuthService.register(this.state.username, this.state.password, this.state.timezone).then(
+            () => {
+                this.props.history.push("/entrance");
+                window.location.reload();
+            })
+    }
 
-/*
-const [email, setEmail] = useState('');
-const [password, setPassword] = useState('');
-const [timeZone, setTimeZone] = useState('');
-const [user, setUser] = useState(false);
-const signOut=()=>setUser(false);
-const signIn=()=>setUser(true);
-<Container style={{width: '500px'}}>
-    <h1 className="text-center">Введите данные</h1>
-    <Form>
-        <Form.Group controlId="formBasicEmail">
-            <Form.Label>EMAIL</Form.Label>
-            <Form.Control onChange={()=> setEmail(email)} type="email"
-                          placeholder="Введите email"/>
-        </Form.Group>
 
-        <Form.Group controlId="formBasicPassword">
-            <Form.Label>ПАРОЛЬ</Form.Label>
-            <Form.Control onChange={()=> setPassword(password)} type="password"
-                          placeholder="Введите пароль"/>
-        </Form.Group>
+    render() {
+        return (
+            <>
+                <Container style={{width: '500px'}}>
+                    <h1 className="text-center">Введите данные</h1>
+                    <Form>
+                        <Form.Group controlId="formBasicUsername">
+                            <Form.Label>Имя пользователя</Form.Label>
+                            <Form.Control type="email" placeholder="Введите имя пользователя"
+                                          onChange={this.onChangeUsername}/>
+                        </Form.Group>
 
-        <Form.Group controlId="timeZone">
-            <Form.Label>Временная зона</Form.Label>
-            <Form.Control onChange={()=> setTimeZone(timeZone)} type="timeZone"
-                          placeholder="Введите временную зону"/>
-        </Form.Group>
+                        <Form.Group controlId="formBasicPassword">
+                            <Form.Label>ПАРОЛЬ</Form.Label>
+                            <Form.Control type="password" placeholder="Введите пароль"
+                                          onChange={this.onChangePassword}/>
+                        </Form.Group>
 
-        <Form.Group controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Запомнить меня"/>
-        </Form.Group>
+                        <Form.Group controlId="timeZone">
+                            <Form.Label>Временная зона</Form.Label>
+                            <Form.Control type="timeZone" placeholder="Введите временную зону"
+                                          onChange={this.onChangeTimezone}/>
+                        </Form.Group>
 
-        <Button type="button" onClick={signIn} className="primary">Отправить</Button>
+                        <Form.Group controlId="formBasicCheckbox">
+                            <Form.Check type="checkbox" label="Запомнить меня"/>
+                        </Form.Group>
 
-    </Form>
-</Container>*/
+                        <Button onClick={this.handleRegister} className="primary">Отправить</Button>
+                    </Form>
+                </Container>
+            </>
+        )
+    }
+}

@@ -1,104 +1,100 @@
 import React, {Component} from "react";
-import {Container, Form} from "react-bootstrap";
-import Table from "../utils/Table";
-
-function TableBanner(props) {
-    if (!props.code) {return null}
-    return <div className="warning"/>
-}
+import {Container, Row, Col} from "react-bootstrap";
+import authHeader from "../components/authHeader";
 
 export default class Sensors extends Component{
 
     constructor(props) {
         super(props)
-        this.state = { showTable: true, items: [], errorText: ""}
-        this.handleToggleClick = this.handleToggleClick.bind(this)
+        this.state = {
+            error: null,
+            isLoaded: false,
+            houses: [],
+            items: [],
+            counter: 0
+        };
     }
 
-    handleToggleClick() {
-
-        let start = new Date(this.refs.d1.value + " " + this.refs.t1.value);
-        let end = new Date(this.refs.d2.value + " " + this.refs.t2.value);
-
-        start = (start == 'Invalid Date') ? 0 : start.getTime();
-        end = (end == 'Invalid Date') ? Number.MAX_SAFE_INTEGER : end.getTime();
-
-        console.log(start);
-        console.log(end);
-
-        let request = new Request("http://3.142.115.21/sensors/1/data?start=" + start + "&end=" + end);
+    componentDidMount() {
+        let options = {
+            Method: 'GET',
+            headers: Object.assign(authHeader(), {
+                'Access-Control-Allow-Origin': 'http://3.142.115.21',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                'Access-Control-Allow-Methods': 'GET,PUT,POST,DELETE,PATCH,OPTIONS'
+            })
+        }
+        console.log(options)
+        let request = new Request("http://3.142.115.21/houses", options)
         fetch(request)
             .then(res => res.json())
             .then(
                 (result) => {
+                    this.setState({
+                        houses: result.houses
+                    });
 
-                    if(result.code == 0){
-
-                        let keys = Object.keys(result.data)
-                        let values = Object.values(result.data)
-
-                        let data = [];
-                        for(let i = 0; i < keys.length; i++) data.push({"time": (new Date(parseInt(keys[i])).toLocaleString()), "value": values[i]})
-
-                        this.setState({
-                            showTable: true,
-                            items: data,
-                            errorText: ""
-                        });
-                    }else {
-                        this.setState({
-                            showTable: false,
-                            items: [],
-                            errorText: result.error
-                        });
+                    if(this.state.houses.length == 0){
+                        this.setState({isLoaded: true})
+                        return
                     }
 
-
-                },
-                (error) => {
-                    this.setState({
-                        showTable: false,
-                        items: [],
-                        errorText: "Ошибка при отправке"
-                    });
-                }
-            )
+                    this.state.counter = 0
+                    for (let house of this.state.houses) {
+                        request = new Request('http://3.142.115.21/houses/' + house, options)
+                        fetch(request)
+                            .then(res => res.json())
+                            .then(
+                                (result) => {
+                                    this.state.counter += 1
+                                    this.state.items = [...this.state.items, {
+                                        id: house, name: result.house_name, color: result.house_color}]
+                                    if(this.state.counter == this.state.houses.length) {
+                                        this.setState({
+                                            isLoaded: true
+                                        })
+                                    }
+                                })
+                    }},
+                )
     }
+
     render() {
+
+        const { error, isLoaded, items } = this.state;
+        let cont;
+        if (error) {
+            cont = <div>Ошибка: {error}</div>;
+        } else if (!isLoaded) {
+            cont = <div>Загрузка...</div>;
+        } else {
+            cont =
+                <div className="card-deck">
+                    <ul style={{ marginTop: '40px'}}>
+                    {items.map(item => (
+
+                        <div class="key={item.id}">
+                            <h4><a href={"/table/" + item.id} style={{textDecoration: "none"}}>{item.name}</a></h4>
+                        </div>
+                    ))}
+                </ul>
+                </div>
+        }
+
         return (
             <>
-                <Container style={{width: '500px'}}>
-                    <h1 className="text-center">Введите данные</h1>
-                    <Form>
 
-                        <Form.Group controlId="formBasicStartDateTime">
-                            <Form.Label>Дата начала</Form.Label>
-                            <Form.Control ref="d1" type="date" placeholder="Введите дату и время Начала"/>
-                            <Form.Control ref="t1" type="time" placeholder="Введите время Начала"/>
-                            <Form.Text>
-                                Выберите дату и время Начала
-                            </Form.Text>
-                        </Form.Group>
+                <Container style={{width: '600px', height: '800px', marginTop: '80px'}}>
+                    <Row>
+                        <Col>
+                            <h1 className="d-inline">Дома:</h1>
+                            <a href={"/table/addHouse"}>
+                                <button className="btn btn-outline-primary float-end">Добавить дом</button></a>
+                        </Col>
+                    </Row>
 
-                        <Form.Group controlId="formBasicEndDateTime">
-                            <Form.Label>Дата конца</Form.Label>
-                            <Form.Control ref="d2" type="date" placeholder="Введите дату и время Конца"/>
-                            <Form.Control ref="t2" type="time" placeholder="Введите время Конца"/>
-                            <Form.Text>
-                                Введите дату и время Конца
-                            </Form.Text>
-                        </Form.Group>
-                    </Form>
-                </Container>
+                    {cont}
 
-                <Container>
-                    <div className="text-center">
-                        <TableBanner code={this.state.showTable} errorText={this.state.errorText}/>
-                        <button type="submit" className="btn btn-outline-primary " onClick={this.handleToggleClick} >Отправить</button>
-                        {/*{this.state.showTable ? <Table data={this.state.items}/> : null}*/}
-
-                        <Table data={this.state.items}/>
-                    </div>
                 </Container>
             </>
         )

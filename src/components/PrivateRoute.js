@@ -1,11 +1,18 @@
 import React from "react";
 import {Redirect, Route} from "react-router-dom";
-import {withAuth} from "./UserStatus";
+import checkAuthorization from "./checkAuthorization";
 
-export const PrivateRoute = withAuth(
-    ({component: RouteComponent, isAuthorized, ...rest}) => (
-    <Route {...rest} render={routerProps => (
-        isAuthorized ?
-            (<RouteComponent {...routerProps}/>) : (<Redirect to={"/entrance"}/>)
-    )}/>
-))
+export const PrivateRoute = ({ component: Component, ...rest }) => {
+
+    let isLoggedIn = checkAuthorization()
+
+    return (
+        <Route {...rest} render={props => isLoggedIn
+            ? (
+                <Component key={props.match.params.id || 'empty'} {...props} />
+            ) : (
+                <Redirect to={{ pathname: '/entrance', state: { from: props.location }}} />
+            )
+        } />
+    )
+}

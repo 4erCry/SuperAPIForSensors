@@ -13,8 +13,8 @@ export default class CarouselBox extends Component{
                         alt="Arduino1"
                     />
                     <Carousel.Caption>
-                        <h3>Описание платформы</h3>
-                        <p>Текст для описания платформы</p>
+                        <h3>SAS project</h3>
+                        <p>Платформа, предоставляющая простой способ сохранить ваши данные и визуализировать их</p>
                     </Carousel.Caption>
                 </Carousel.Item>
 
